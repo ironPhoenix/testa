@@ -1,17 +1,17 @@
 package com.hans.test;
 
 import com.hans.freeregex.FreeMatcher;
-import com.hans.freeregex.FreeType;
+import com.hans.freeregex.FreeReplacement;
 
 public class Test {
 	public static void main(String[] args) {
 		String txtString = "ew10213asfas hasnf 10032 asdfa 12 1231254 ";
 		String regexString = "\\d+";
 		System.out.println(FreeMatcher.anyOf(regexString).replaceFrom(
-				txtString, new FreeType() {
-					public String replace(String A) {
+				txtString, new FreeReplacement() {
+					public String replacementMethod(String original) {
 						
-						char[] charArray = A.toCharArray();
+						char[] charArray = original.toCharArray();
 						StringBuilder sb = new StringBuilder("");
 						int j = charArray.length;
 						for (int i = 0; j > 0;i++) {
@@ -19,13 +19,13 @@ public class Test {
 								sb.insert(0, ',');
 							} 
 								sb.insert(0, charArray[j - 1]);
-								j--;
-								
-							
+								j--;					
 						}
 						System.out.println(sb);
 						return sb.toString();
 					}
+
+					
 				}));
 		/*
 		 * StringBuilder sb = new StringBuilder("adfasdf"); sb.insert(0, 'z');

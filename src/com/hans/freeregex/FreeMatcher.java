@@ -23,7 +23,14 @@ public abstract class FreeMatcher {
 				return pattern.matcher(sequence);
 			}
 		};
+	}
 
+	public FreeMatcher or(FreeMatcher other) {
+		return null;
+	}
+
+	public FreeMatcher and(FreeMatcher other) {
+		return null;
 	}
 
 	abstract Matcher getMatcher(CharSequence sequence);
@@ -55,15 +62,21 @@ public abstract class FreeMatcher {
 		return list;
 	}
 
-	public String replaceFrom(CharSequence sequence, String replaceTo) {
-		return null;
-	}
-
-	public String replaceFrom(CharSequence sequence, FreeType replaceTo) {
+	public String replaceFrom(CharSequence sequence, String replacement) {
 		Matcher m = getMatcher(sequence);
 		StringBuffer buf = new StringBuffer();
 		while (m.find()) {
-			m.appendReplacement(buf, replaceTo.replace(m.group()));
+			m.appendReplacement(buf, replacement);
+		}
+		m.appendTail(buf);
+		return buf.toString();
+	}
+
+	public String replaceFrom(CharSequence sequence, FreeReplacement replacement) {
+		Matcher m = getMatcher(sequence);
+		StringBuffer buf = new StringBuffer();
+		while (m.find()) {
+			m.appendReplacement(buf, replacement.replacementMethod(m.group()));
 		}
 		m.appendTail(buf);
 		return buf.toString();
