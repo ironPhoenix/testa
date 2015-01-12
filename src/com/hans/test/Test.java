@@ -1,11 +1,11 @@
 package com.hans.test;
 
-import com.hans.freeregex.FreeMatcher;
-import com.hans.freeregex.FreeReplacement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Test {
 	public static void main(String[] args) {
-		String txtString = "ew10213asfas hasnf 10032 asdfa 12 1231254 ";
+		/*String txtString = "10213asfas hasnf 10032 asdfa 12 1231254 fsdafsd";
 		String regexString = "\\d+";
 		System.out.println(FreeMatcher.anyOf(regexString).replaceFrom(
 				txtString, new FreeReplacement() {
@@ -26,11 +26,17 @@ public class Test {
 					}
 
 					
-				}));
+				}));*/
 		/*
 		 * StringBuilder sb = new StringBuilder("adfasdf"); sb.insert(0, 'z');
 		 * System.out.println(sb);
 		 */
+		String regexA = "\\d";
+		String regexB = "[a-zA-Z]";
+		Pattern p1 = Pattern.compile(regexA);
+		Pattern p2 = Pattern.compile(regexB);
+		System.out.println(Pattern.matches(p1.pattern()+"|"+p2.pattern(), "d"));
+		
 
 	}
 }
